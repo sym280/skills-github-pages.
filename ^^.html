@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Baikan Yuukkkk...?</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-image: url('/api/placeholder/1600/1000');
+            background-size: cover;
+            background-position: center;
+            font-family: 'Arial', sans-serif;
+            overflow: hidden;
+        }
+        .container {
+            width: 90%;
+            max-width: 350px;
+            background-color: rgba(255, 255, 255, 0.9);
+            border-radius: 15px;
+            padding: 25px;
+            text-align: center;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+        h2 {
+            margin-bottom: 20px;
+            color: #333;
+            font-size: 1.2rem;
+        }
+        .button-container {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+        .btn {
+            flex: 1;
+            padding: 12px;
+            border: none;
+            border-radius: 8px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+        #yesBtn {
+            background-color: #4CAF50;
+            color: white;
+        }
+        #noBtn {
+            background-color: #F44336;
+            color: white;
+            position: relative;
+        }
+        #responseText {
+            margin-top: 15px;
+            font-weight: bold;
+            color: #FF1493;
+            min-height: 50px;
+        }
+        .btn:active {
+            transform: scale(0.95);
+        }
+        #audio {
+            display: none;
+        }
+        @media (max-height: 600px) {
+            .container {
+                max-width: 300px;
+                padding: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Baikan Yuukkkk...?</h2>
+        <div class="button-container">
+            <button id="yesBtn" class="btn">Mawwww</button>
+            <button id="noBtn" class="btn">Enggak</button>
+        </div>
+        <div id="responseText"></div>
+        <audio id="audio">
+            <source src="/api/placeholder/audio" type="audio/mpeg">
+        </audio>
+    </div>
+
+    <script>
+        const yesBtn = document.getElementById('yesBtn');
+        const noBtn = document.getElementById('noBtn');
+        const responseText = document.getElementById('responseText');
+        const audio = document.getElementById('audio');
+
+        // Mobile-friendly random movement
+        function moveNoButton() {
+            const container = document.querySelector('.container');
+            const containerRect = container.getBoundingClientRect();
+            
+            const maxX = containerRect.width - noBtn.offsetWidth;
+            const maxY = containerRect.height - noBtn.offsetHeight;
+            
+            const randomX = Math.random() * maxX;
+            const randomY = Math.random() * maxY;
+            
+            noBtn.style.position = 'absolute';
+            noBtn.style.left = `${randomX}px`;
+            noBtn.style.top = `${randomY}px`;
+        }
+
+        // Touch and hover events for mobile compatibility
+        noBtn.addEventListener('touchstart', moveNoButton);
+        noBtn.addEventListener('mouseover', moveNoButton);
+
+        yesBtn.addEventListener('click', () => {
+            responseText.innerHTML = "Yeayyy baikannn, i love you more sayangkuu, cantikkuu, bocil kuu duniaakuuu, rumahkuu kesayangan kuuu i love youuu💞🪐✨🫶🏻";
+            
+            // Attempt to play audio
+            audio.play().catch(error => {
+                console.log('Audio play failed:', error);
+                alert('Silakan aktifkan pemutaran audio di browser Anda');
+            });
+        });
+
+        // Prevent button from staying out of view
+        window.addEventListener('resize', () => {
+            noBtn.style.position = 'static';
+        });
+    </script>
+</body>
+</html>
